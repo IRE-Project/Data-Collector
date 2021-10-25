@@ -33,3 +33,12 @@ values is a list with:
 * index 5  = Goods and Services Description
 * index 6  = Applicant Address
 * index 7 = trademark image link
+
+
+#Comparison Report
+
+* 1773 data points in 2015 master seed data that is not present in our current dataset.
+* Checked a few of them and found that they are old CINs of companies that have been alloted new CINs.
+* The new CINs are present in our dataset.
+* It would be better to collect company data, which will include the old cins too and then create an exhaustive list and comapre.
+* Presently these 1773 cins are stored in data/extra_cin_in_master.json
