@@ -34,6 +34,28 @@ values is a list with:
 * index 6  = Applicant Address
 * index 7 = trademark image link
 
+Data Collection:
+0-9999: Companies with at least 1 Trademark: 330
+10000-19999: Companies with at least 1 Trademark: 317
+20000-29999: Companies with at least 1 Trademark: 289
+30000-39999: Companies with at least 1 Trademark: 324
+40000-49999: Companies with at least 1 Trademark: 350
+50000-59999: Companies with at least 1 Trademark: 304
+60000-69999: Companies with at least 1 Trademark: 318 - 1 err
+70000-79999: Companies with at least 1 Trademark: 353 - 8 err
+80000-89999: Companies with at least 1 Trademark: 352 - 3 err
+90000-99999: Companies with at least 1 Trademark: 332 - 2 err
+100000-104999: Companies with at least 1 Trademark: 166
+105000-109999: Companies with at least 1 Trademark: 174 - 1err
+110000-114999: Companies with at least 1 Trademark: 161 - 1err
+115000-119999: Companies with at least 1 Trademark: 178
+120000-124999: Companies with at least 1 Trademark: 144
+125000-129999: Companies with at least 1 Trademark: 153
+130000-134999: Companies with at least 1 Trademark: 152
+135000-139999: Companies with at least 1 Trademark: 148
+140000-140279: Companies with at least 1 Trademark: 8
+
+Total: 
 
 #Comparison Report
 
