@@ -1,6 +1,8 @@
 """@file
-This file is responsible scraping trademark data from zaubacorp.
+This file is responsible for resolving all errors and integrity issues in trademarks and create the final
+dataset for trademarks.
 """
+import os
 import requests
 from bs4 import BeautifulSoup
 from collections import defaultdict
@@ -83,23 +85,62 @@ def add_trademarks(trademarks, cin, c_name):
         print(cin, c_name)
 
 
-file = open("../../data/zaubacorp.com/linkslist.json", "r")
-links = json.load(file)
-file.close()
+def find_missing():
+    """
+    Adds all the missing trademark values to trademark
+    :return:
+    """
+    trademarks = defaultdict(lambda: [])
+    missing_list = [
+        ["U72200TG2013PTC088972", "TALIS IT SOLUTIONS PRIVATE LIMITED"],
+        ["U65993TG1991PTC012660", "SOMSONS FINANCE AND INVESTMENTS PRIVATE LMITED"],
+        ["U65910TG1995PLC020001", "SONA FINANCIAL SERVICES LTD"],
+        ["U72200TG2013PTC089391", "VENMAH TECH SOLUTIONS PRIVATE LIMITED"],
+        ["U01113TG2016PTC109214", "HIGHGROW CROP CARE PRIVATE LIMITED"],
+        ["L74300TG1992PLC014317", "GRADIENTE INFOTAINMENT LIMITED"],
+        ["U14107TG2008PTC060385", "GRANITECH MINERALS & CEMENTS PRIVATE LIMITED"],
+        ["U14102TG1985PTC006002", "GRANITES AND TOOLS PVT LTD"],
+        ["U74999TG2017OPC117558", "AVTES(OPC) PRIVATE LIMITED"],
+        ["U74999TG2016PTC112480", "KETTE ENTERPRISES PRIVATE LIMITED"],
+        ["U74110TG1996PLC024363", "NWONDER TRADERS LIMITED"],
+        ["U72900TG2020PTC141495", "ITGEN INFO SYSTEMS PRIVATE LIMITED"],
+        ["U01110TG2017PTC116834", "KIDDOGARDENER PRIVATE LIMITED"],
+        ["AAQ-0160", "PABUJI PLYWOOD AND HARDWARE LLP"],
+        ["U72900TG2017PTC114587", "GIGGS INNOVATIONS PRIVATE LIMITED"],
+        ["U74999TG2011PTC076420", "GLITZ ANTIQUES & HERBS PRIVATE LIMITED"]
+    ]
+    print(len(missing_list))
 
-trademarks = defaultdict(lambda: [])
+    for ele in missing_list:
+        print(ele)
+        add_trademarks(trademarks, ele[0], ele[1])
 
-start = int(input("Starting Index(Inclusive): "))
-end = int(input("End Index(Inclusive): "))
+    file = open(f"../../../data/zaubacorp.com/Trademarks/trademarks_missing.json", "w+")
+    json.dump(trademarks,file, indent=4)
+    file.close()
 
-k = 0
-for row in links["data"][start: end+1]:
-    add_trademarks(trademarks, row[0], row[1])
-    k += 1
-    print(f"\rProgress: {k} / {end - start + 1}", end="")
 
-print("\n\nCompanies with at least 1 Trademark: ", comp_count)
+def accumulate_all():
+    """
+    Combines all the json files in trademark directory and and saves them in
+    trademarks_final.json
+    :return: None
+    """
+    final_data = {}
+    path = "../../../data/zaubacorp.com/Trademarks/"
+    for file_name in os.listdir(path):
+        file = open(path + file_name, "r")
+        trademarks = json.load(file)
+        file.close()
+        for key, val in trademarks.items():
+            final_data[key] = val
 
-file = open(f"../../data/zaubacorp.com/trademarks{start}-{end}.json", "w+")
-json.dump(trademarks,file, indent=4)
-file.close()
+    print(f"Done for {len(final_data)} CINs")
+    file = open(f"../../../data/zaubacorp.com/Trademarks/trademarks_final.json", "w+")
+    json.dump(final_data, file, indent=4)
+    file.close()
+
+
+if __name__ == "__main__":
+    # find_missing()
+    accumulate_all()
