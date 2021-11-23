@@ -1,3 +1,6 @@
+"""@file
+This file is responsible for weeding out all errors in the base company list.
+"""
 import json
 import requests
 from bs4 import BeautifulSoup
@@ -5,6 +8,10 @@ from collections import defaultdict
 
 
 def check_log():
+    """
+    Extracts points of failures in the implementation using the log file
+    :return:
+    """
     log_file = open("../../data/zaubacorp.com/links_log.txt")
 
     while True:
@@ -32,6 +39,12 @@ def check_log():
 
 
 def include_missing(links, page):
+    """
+    scraps list data from zaubacorp listings for the given page and adds it to links and saves it
+    :param links: dict to store the data
+    :param page: page number
+    :return: None
+    """
     print("PAGE: ", page)
     try:
         item_count = 0
@@ -67,6 +80,11 @@ def include_missing(links, page):
 
 
 def verify(links):
+    """
+    Verifies the integrity of all columns of links
+    :param links:
+    :return: True if integrity is maintained, False otherwise
+    """
     ret = True
     for key, val in links.items():
         if len(key) < 2 or len(val["Company"]) < 2 or len(val["RoC"]) < 2 or len(val["Status"]) < 2 or len(

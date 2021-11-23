@@ -1,3 +1,6 @@
+"""@file
+This file is responsible scraping the company information from zaubacorp listings to generate the base dataset.
+"""
 import requests
 from bs4 import BeautifulSoup
 from collections import defaultdict

@@ -1,8 +1,15 @@
+"""@file
+This file has utilities used for smaller tasks.
+"""
 import json
 from openpyxl import load_workbook
 
 
 def dictlinks_to_list():
+    """
+    Converts the dict format of links to list format for easier batch runs.
+    :return: None
+    """
     file = open("../../data/zaubacorp.com/links.json", "r")
     links = json.load(file)
     file.close()
